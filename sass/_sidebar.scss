@@ -1,0 +1,80 @@
+aside {
+  padding: 0 2.5rem;
+  transition: transform .5s ease-in-out;
+  transform: translateY( calc(45vh - 80px) );
+  z-index: 999;
+  position: absolute;
+  width: 100%;
+  &.active {
+    transform: translateY(0);
+    #des .drop-link {
+      transform: rotate(-180deg);
+    }
+  }
+  &:not(.active) {
+    #map {
+      pointer-events: none !important;
+    }
+  }
+}
+// map
+#map {
+  border-radius: 25px 0 0 0;
+  box-shadow: rgba(0,0,0,0.6) 0 0 6px 8px;
+}
+// description
+#des {
+  .drop-link {
+    width: 32px;
+    height: 32px;
+    border: 2px solid #454e75;
+    border-radius: 50px;
+    position: absolute;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    right: 2rem;
+    text-align: center;
+    transition: transform .5s linear;
+    transform: rotate(0);
+  }
+  .container:first-child {
+    background: $grey-3 url(../img/search-label.png) 26px 24px no-repeat;
+    position: sticky;
+    top: 0;
+    height: 80px;
+    border-radius: 0 25px 0 0;
+    z-index: 999;
+    padding-left: 4.2rem;
+  }
+  .container:last-child {
+    padding: .25rem 2rem;
+    background-color: $grey-1;
+    overflow-y: scroll;
+    height: calc(45vh - 80px);
+  }
+}
+p {
+  font-size: .9rem;
+  line-height: 1.8;
+}
+.event {
+  border-radius: 5px;
+  padding: 1rem 1.5rem;
+  position: relative;
+  background: $grey-2;
+  margin: .5rem .75rem;
+  text-align: center;
+  float: left;
+  &::before {
+    content: "\25b6";
+    position: absolute;
+    left: -19px;
+  }
+  &:first-child {
+    margin-left: 0;
+    &::before {
+      content: none;
+    }
+  }
+}
