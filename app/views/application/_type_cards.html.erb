@@ -1,0 +1,16 @@
+<% Type.all.each do |t| %>
+    <%= link_to type_path(t), :class => "col-12 mb-1" do %>
+        <div class="card <%= t.color %>">
+            <div class="card-title">
+                <h4 class="mt-0 mb-1"><%= t.name %></h4>
+            </div>
+            <div class="card-body">
+                <% t.pieces.reverse_each do |p| %>
+                    <div class="small-img">
+                    <img src="https://dummyimage.com/64x64/000/fff" alt="piece classified as <%= t.name %>">
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    <% end %>
+<% end %>
