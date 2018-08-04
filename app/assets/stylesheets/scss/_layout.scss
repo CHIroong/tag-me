@@ -1,39 +1,42 @@
-aside, main {
-    height: 100vh;
+/* index */
+.thumb {
+    width: 100%;
 }
-
-/* screenshots */
-aside {
-    border-right: 1px solid $border-color;
-    section:first-child {
-        border-bottom: 1px solid $border-color;
-        height: 35vh;
-        overflow-y: scroll;
-        .back {
-            fill: $grey-9;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            position: absolute;
-            z-index: 999;
-            margin: 15px;
-        }
+/* show */
+#canvas {
+    min-height: 100vh;
+    position: relative;
+}
+.rectangle {
+    border: 1px solid #FF0000;
+    position: absolute;
+    span {
+      font-size: .8em;
+      transition: .3s ease-in-out;
+      z-index: 999;
+      display: inline-block;
+      position: relative;
+      width: 16px;
+      height: 16px;
+      &:hover {
+        color: red;
+        cursor: pointer;
+      }
+      &::after, &::before {
+        content: "";
+        width: 15px;
+        height: 1px;
+        background-color: #000;
+        display: inline-block;
+        position: absolute;
+        left: 2px;
+        top: 8px;
+      }
+      &::after {
+        transform: rotateZ(-45deg);
+      }
+      &::before {
+        transform: rotateZ(45deg);
+      }
     }
-}
-
-/* cards */
-.card {
-    color: #fff;
-    border-radius: 10px;
-    padding: 10px 15px;
-    .card-body {
-        width: 100%;
-        height: 25px;
-        overflow-x: scroll;
-        overflow-y: hidden;
-    }
-}
-
-.small-img {
-    width: 25px;
-    display: inline-block;
 }
