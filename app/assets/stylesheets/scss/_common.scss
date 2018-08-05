@@ -1,5 +1,3 @@
-@import 'fonts';
-
 body {
   @extend %full;
   overflow: scroll;
@@ -55,37 +53,20 @@ small { font-size: 75%; }
    Color classes
    ========================================================================== */
 
-@for $i from 0 through 9 {
-  .grey-#{$i} {
-    background-color: map-get($grey, #{$i});
-  }
-  .text-grey-#{$i} {
-    color: map-get($grey, #{$i});
-  }
-  .red-#{$i} {
-    background-color: map-get($red, #{$i});
-  }
-  .text-red-#{$i} {
-    color: map-get($red, #{$i});
-  }
-  .blue-#{$i} {
-    background-color: map-get($blue, #{$i});
-  }
-  .text-blue-#{$i} {
-    color: map-get($blue, #{$i});
-  }
-  .green-#{$i} {
-    background-color: map-get($green, #{$i});
-  }
-  .text-green-#{$i} {
-    color: map-get($green, #{$i});
-  }
-  .yellow-#{$i} {
-    background-color: map-get($yellow, #{$i});
-  }
-  .text-yellow-#{$i} {
-    color: map-get($yellow, #{$i});
-  }
+.bg-0 {
+  background-color: map-get($grey, "5");
+}
+.bg-1 {
+  background-color: map-get($green, "6");
+}
+.bg-2 {
+  background-color: map-get($blue, "5");
+}
+.bg-3 {
+  background-color: map-get($yellow, "5");
+}
+.bg-4 {
+  background-color: map-get($red, "6");
 }
   
 /* ==========================================================================

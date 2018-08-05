@@ -15,11 +15,11 @@ s6 = Screenshot.create(isFinished: false, assignee: "Jaemin", image: "https://us
 s7 = Screenshot.create(isFinished: false, assignee: "Jaemin", image: "https://user-images.githubusercontent.com/17509651/43684963-14b98a6c-98e5-11e8-8a31-91b1554d34bd.png")
 s8 = Screenshot.create(isFinished: false, assignee: "Jaemin", image: "https://user-images.githubusercontent.com/17509651/43684963-14b98a6c-98e5-11e8-8a31-91b1554d34bd.png")
 
-t1 = Type.create(name: 'Text', color: 'grey-5')
-t2 = Type.create(name: 'Image', color: 'green-6')
-t3 = Type.create(name: 'Graph', color: 'blue-5')
-t4 = Type.create(name: 'Ad', color: 'yellow-5')
-t5 = Type.create(name: 'BadAd', color: 'red-6')
+t1 = Type.create(name: 'Text', color: 'bg-0')
+t2 = Type.create(name: 'Image', color: 'bg-1')
+t3 = Type.create(name: 'Graph', color: 'bg-2')
+t4 = Type.create(name: 'Ad', color: 'bg-3')
+t5 = Type.create(name: 'BadAd', color: 'bg-4')
 
 u1 = Piece.create(screenshot_id: s1.id, type_id: t1.id, left: 30, top: 20, width: 65, height: 40) # image
 u2 = Piece.create(screenshot_id: s1.id, type_id: t2.id, left: 230, top: 120, width: 65, height: 40) # ad

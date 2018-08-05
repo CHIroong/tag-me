@@ -2,7 +2,8 @@
 <div id="canvas" tabindex='1'>
     <% @screenshot.pieces.each do |p| %>
         <div class="rectangle <%= Type.find(p.type_id).color %>" style="left: <%= p.left%>px; top: <%= p.top%>px; width: <%= p.width %>px; height: <%= p.height%>px;">
-            <span class="remove"></span>
+            <span class="btn remove"></span>
+            <span class="btn color bg-<%= (Type.find(p.type_id).color[3].to_i + 1) % 5 %>"></span>
         </div>
     <% end %>
 </div>

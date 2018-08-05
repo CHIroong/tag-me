@@ -57,7 +57,7 @@ function init(canvas) {
     }
 
     function mouseDown(e) {
-        if (e.target.classList.contains("remove"))
+        if (e.target.classList.contains("btn"))
             return;
         console.log("begun.");
         console.log(e.pageX, e.pageY, window.pageXOffset, window.pageYOffset);
@@ -69,7 +69,7 @@ function init(canvas) {
 
     function mouseUp() {
         if (drag) {
-            element.innerHTML = "<span class='remove'></span><span class='color'></span>";
+            element.innerHTML = "<span class='btn remove'></span><span class='btn color'></span>";
             addRemover(element.firstElementChild);
             addColorer(element.lastElementChild);
 
@@ -78,9 +78,9 @@ function init(canvas) {
             canvas.addEventListener('keydown', callColor, false);
 
             drag = false;
-            // element = null;
             canvas.style.cursor = "default";
             console.log("finsihed.");
+            // element = null;
         }
     }
 
@@ -110,7 +110,9 @@ function init(canvas) {
     }
 
     function addColorer(ele) {
-        ele.addEventListener('click', color, false);
+        ele.addEventListener('click', function() {
+            color(parseInt(ele.classList[2].charAt(3)), ele.parentElement);
+        }, false);
     }
 
     function remove(e) {
@@ -123,35 +125,37 @@ function init(canvas) {
             canvas.lastElementChild.remove(); // TODO: call DESTROY
     }
 
-    function color(i) {
-        let colors = ["grey-5", "green-6", "blue-5", "yellow-5", "red-6"],
-            j = (i >= 4)? 0 : i+1;
+    function color(i, ele) {
+        let colors = ["bg-0", "bg-1", "bg-2", "bg-3", "bg-4"],
+            j = (i+1) % 5;
 
-        element.classList.remove(colors);
-        element.lastElementChild.classList.remove(colors);
-        element.classList.add(colors[i]);
-        element.lastElementChild.classList.add(colors[j]);
+        colors.forEach(function(c) {
+            ele.classList.remove(c);
+            ele.lastElementChild.classList.remove(c);
+        })
+
+        ele.classList.add(colors[i]);
+        ele.lastElementChild.classList.add(colors[j]);
     }
 
     function callColor(e) {
         var obj = window.event? event : e
         if (obj.keyCode >= 49 && obj.keyCode <= 53) {
-            
             switch(obj.keyCode) {
                 case 49:
-                    color(0);
+                    color(0, element);
                     break;
                 case 50:
-                    color(1);
+                    color(1, element);
                     break;
                 case 51:
-                    color(2);
+                    color(2, element);
                     break;
                 case 52:
-                    color(3);
+                    color(3, element);
                     break;
                 case 53:
-                    color(4);
+                    color(4, element);
                     break;
             }
         }
