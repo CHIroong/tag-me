@@ -1,7 +1,7 @@
 <img id="bg" src="<%= @screenshot.image %>" alt="screenshot">
 <div id="canvas">
     <% @screenshot.pieces.each do |p| %>
-        <div class="rectangle <%= p.type_id %>" style="left: <%= p.left%>px; top: <%= p.top%>px; width: <%= p.width %>px; height: <%= p.height%>px;">
+        <div class="rectangle <%= Type.find(p.type_id).color %>" style="left: <%= p.left%>px; top: <%= p.top%>px; width: <%= p.width %>px; height: <%= p.height%>px;">
             <span class="remove"></span>
         </div>
     <% end %>
