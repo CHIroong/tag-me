@@ -15,40 +15,45 @@
 .rectangle {
     border: 2px dotted red;
     position: absolute;
-    transition: .3s ease-in-out;
+    transition: opacity .3s ease-in-out;
     &.blue-5, &.green-6, &.yellow-5, &.red-6, &.grey-5 {
         border-color: transparent;
         opacity: 0.7;
     }
     span {
-      font-size: .8em;
-      transition: .3s ease-in-out;
-      z-index: 999;
-      display: inline-block;
-      position: relative;
-      width: 16px;
-      height: 16px;
-      &:hover {
-        cursor: pointer;
-        &::after, &::before {
-            background-color: #fff;
-        }
-      }
-      &::after, &::before {
-        content: "";
-        width: 15px;
-        height: 1px;
-        background-color: #000;
+        font-size: .8em;
+        transition: .3s ease-in-out;
+        z-index: 999;
         display: inline-block;
-        position: absolute;
-        left: 2px;
-        top: 8px;
-      }
-      &::after {
-        transform: rotateZ(-45deg);
-      }
-      &::before {
-        transform: rotateZ(45deg);
-      }
+        position: relative;
+        width: 16px;
+        height: 16px;      
+    }
+    .color {
+        border-radius: 50%;
+    }
+    .remove {
+        &:hover {
+            cursor: pointer;
+            &::after, &::before {
+                background-color: #fff;
+            }
+        }
+        &::after, &::before {
+            content: "";
+            width: 15px;
+            height: 1px;
+            background-color: #000;
+            display: inline-block;
+            position: absolute;
+            left: 2px;
+            top: 8px;
+        }
+        &::after {
+            transform: rotateZ(-45deg);
+        }
+        &::before {
+            transform: rotateZ(45deg);
+        }
     }
 }

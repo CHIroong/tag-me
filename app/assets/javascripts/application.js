@@ -36,82 +36,124 @@ function init(canvas) {
     canvas.addEventListener('mouseup', mouseUp, false);
     canvas.addEventListener('mousemove', mouseMove, false);
     
-    Array.from(document.querySelectorAll(".remove")).forEach(addRemover);
-    document.onkeydown = function(e) {
+    document.addEventListener('keydown', function(e) {
         cancel(e, canvas);
-    };
-}
+    }, false);
 
-function setMousePosition(e) {
-    let ev = e || window.event; // Moz || IE
+    Array.from(document.querySelectorAll(".remove")).forEach(addRemover);
+    Array.from(document.querySelectorAll(".color")).forEach(addColorer);
 
-    if (ev.pageX) { // Moz
-        // console.log(ev.pageX, ev.pageY, window.pageXOffset, window.pageYOffset);
-        mouse.x = ev.pageX; // + window.pageXOffset
-        mouse.y = ev.pageY; // + window.pageYOffset;
-    } 
-    else if (ev.clientX) { // IE
-        mouse.x = ev.clientX + document.body.scrollLeft;
-        mouse.y = ev.clientY + document.body.scrollTop;
+    function setMousePosition(e) {
+        let ev = e || window.event; // Moz || IE
+
+        if (ev.pageX) { // Moz
+            mouse.x = ev.pageX; // + window.pageXOffset
+            mouse.y = ev.pageY; // + window.pageYOffset;
+        } 
+        else if (ev.clientX) { // IE
+            mouse.x = ev.clientX + document.body.scrollLeft;
+            mouse.y = ev.clientY + document.body.scrollTop;
+        }
     }
-}
 
-function mouseDown(e) {
-	if (e.target.classList.contains("remove"))
-        return;
-    console.log("begun.");
-    console.log(e.pageX, e.pageY, window.pageXOffset, window.pageYOffset);
-    mouse.startX = mouse.x;
-    mouse.startY = mouse.y;
-    startDraw();
-    drag = true;
-}
-
-function mouseUp() {
-	if (drag) {
-        element.innerHTML = "<span class='remove'></span>";
-        addRemover(element.firstElementChild);
-
-        // TODO: POST piece 
-
-        drag = false;
-        element = null;
-        canvas.style.cursor = "default";
-        console.log("finsihed.");
+    function mouseDown(e) {
+        if (e.target.classList.contains("remove"))
+            return;
+        console.log("begun.");
+        console.log(e.pageX, e.pageY, window.pageXOffset, window.pageYOffset);
+        mouse.startX = mouse.x;
+        mouse.startY = mouse.y;
+        startDraw();
+        drag = true;
     }
-}
 
-function mouseMove(e) {
-    e.preventDefault();
-	setMousePosition(e);
-    if (drag) {
-        element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
-        element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
-        element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
-        element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
+    function mouseUp() {
+        if (drag) {
+            element.innerHTML = "<span class='remove'></span><span class='color'></span>";
+            addRemover(element.firstElementChild);
+            addColorer(element.lastElementChild);
+
+            // TODO: POST piece
+            canvas.removeEventListener('keydown', callColor, false);
+            canvas.addEventListener('keydown', callColor, false);
+
+            drag = false;
+            // element = null;
+            canvas.style.cursor = "default";
+            console.log("finsihed.");
+        }
     }
-}
 
-function startDraw() {
-    element = document.createElement('div');
-    element.className = 'rectangle'
-    element.style.left = mouse.x + 'px';
-    element.style.top = mouse.y + 'px';
-    
-    canvas.appendChild(element)
-    canvas.style.cursor = "crosshair";
-}
+    function mouseMove(e) {
+        e.preventDefault();
+        setMousePosition(e);
+        if (drag) {
+            element.style.width = Math.abs(mouse.x - mouse.startX) + 'px';
+            element.style.height = Math.abs(mouse.y - mouse.startY) + 'px';
+            element.style.left = (mouse.x - mouse.startX < 0) ? mouse.x + 'px' : mouse.startX + 'px';
+            element.style.top = (mouse.y - mouse.startY < 0) ? mouse.y + 'px' : mouse.startY + 'px';
+        }
+    }
 
-function addRemover(ele) {
-    ele.addEventListener('click', remove, false);
-}
+    function startDraw() {
+        element = document.createElement('div');
+        element.className = 'rectangle'
+        element.style.left = mouse.x + 'px';
+        element.style.top = mouse.y + 'px';
+        
+        canvas.appendChild(element)
+        canvas.style.cursor = "crosshair";
+    }
 
-function remove(e) {
-	e.target.parentElement.remove(); // TODO: call DESTROY
-}
+    function addRemover(ele) {
+        ele.addEventListener('click', remove, false);
+    }
 
-function cancel(e, canvas) {
-    var obj = window.event? event : e
-    if (obj.keyCode == 90 && obj.ctrlKey && canvas.lastElementChild)
-        canvas.lastElementChild.remove(); // TODO: call DESTROY
+    function addColorer(ele) {
+        ele.addEventListener('click', color, false);
+    }
+
+    function remove(e) {
+        e.target.parentElement.remove(); // TODO: call DESTROY
+    }
+
+    function cancel(e, canvas) {
+        var obj = window.event? event : e
+        if (obj.keyCode == 90 && obj.ctrlKey && canvas.lastElementChild)
+            canvas.lastElementChild.remove(); // TODO: call DESTROY
+    }
+
+    function color(i) {
+        let colors = ["grey-5", "green-6", "blue-5", "yellow-5", "red-6"],
+            j = (i >= 4)? 0 : i+1;
+
+        element.classList.remove(colors);
+        element.lastElementChild.classList.remove(colors);
+        element.classList.add(colors[i]);
+        element.lastElementChild.classList.add(colors[j]);
+    }
+
+    function callColor(e) {
+        var obj = window.event? event : e
+        if (obj.keyCode >= 49 && obj.keyCode <= 53) {
+            
+            switch(obj.keyCode) {
+                case 49:
+                    color(0);
+                    break;
+                case 50:
+                    color(1);
+                    break;
+                case 51:
+                    color(2);
+                    break;
+                case 52:
+                    color(3);
+                    break;
+                case 53:
+                    color(4);
+                    break;
+            }
+        }
+    }
 }
