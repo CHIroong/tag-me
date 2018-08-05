@@ -51,16 +51,14 @@ class PiecesController < ApplicationController
     end
   end
 
-  def piece_type
-    piece_type_hash = {user_id: current_user.id, feed_id: params[:id]}
-    t = PieceType.where(piece_type_hash)
-    if t.empty?
-      PieceType.create(piece_type_hash)
-    else
-      t.destroy_all # TODO: Fix this to destroying with id
+  # DELETE /pieces/1
+  # DELETE /pieces/1.json
+  def destroy
+    @piece.destroy
+    respond_to do |format|
+      format.html { redirect_to pieces_url, notice: 'Piece was successfully destroyed.' }
+      format.json { head :no_content }
     end
-    
-    redirect_to action: 'index'
   end
 
   private
@@ -71,6 +69,6 @@ class PiecesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def piece_params
-      params.require(:piece).permit(:checked)
+      params.fetch(:piece, {})
     end
 end

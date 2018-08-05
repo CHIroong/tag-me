@@ -10,25 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180802080032) do
-
-  create_table "piece_types", force: :cascade do |t|
-    t.integer "piece_id", null: false
-    t.integer "type_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["piece_id"], name: "index_piece_types_on_piece_id"
-    t.index ["type_id"], name: "index_piece_types_on_type_id"
-  end
+ActiveRecord::Schema.define(version: 20180805093234) do
 
   create_table "pieces", force: :cascade do |t|
+    t.integer "left"
+    t.integer "top"
+    t.integer "width"
+    t.integer "height"
     t.integer "screenshot_id"
-    t.boolean "checked"
+    t.integer "type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["screenshot_id"], name: "index_pieces_on_screenshot_id"
+    t.index ["type_id"], name: "index_pieces_on_type_id"
   end
 
   create_table "screenshots", force: :cascade do |t|
+    t.boolean "isFinished"
+    t.string "assignee"
+    t.string "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

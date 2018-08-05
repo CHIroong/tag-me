@@ -3,6 +3,11 @@
     width: 100%;
 }
 /* show */
+#bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 #canvas {
     min-height: 100vh;
     position: relative;

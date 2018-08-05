@@ -17,7 +17,7 @@ class PiecesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create piece" do
     assert_difference('Piece.count') do
-      post pieces_url, params: { piece: { checked: @piece.checked } }
+      post pieces_url, params: { piece: {  } }
     end
 
     assert_redirected_to piece_url(Piece.last)
@@ -34,7 +34,7 @@ class PiecesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update piece" do
-    patch piece_url(@piece), params: { piece: { checked: @piece.checked } }
+    patch piece_url(@piece), params: { piece: {  } }
     assert_redirected_to piece_url(@piece)
   end
 
