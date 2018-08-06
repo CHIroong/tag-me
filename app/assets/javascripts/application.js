@@ -70,18 +70,39 @@ function init(canvas) {
 
     function mouseUp() {
         if (drag) {
+            // Attach listeners to the buttons
             element.innerHTML = "<span class='btn remove'></span><span class='btn color'></span>";
             addRemover(element.firstElementChild);
             addColorer(element.lastElementChild);
 
-            // TODO: POST piece
+            // POST a new piece
+            const screenshot_id = canvas.dataset.screenshotid;
+            let data = {
+                            width: element.style.width,
+                            height: element.style.height,
+                            left: element.style.left,
+                            top: element.style.top
+                        };
+
+            $.ajax({
+                type: "POST",
+                dataType: "JSON",
+                url: "/screenshots/" + screenshot_id + "/pieces",
+                data: data,
+                success: function(response) {
+                    element.dataset.pieceid = response.id;
+                    return;
+                }
+            });
+
+            // Color changer by keydown
             canvas.removeEventListener('keydown', callColor, false);
             canvas.addEventListener('keydown', callColor, false);
 
+            // Reset variables
             drag = false;
             canvas.style.cursor = "default";
             console.log("finsihed.");
-            // element = null;
         }
     }
 
@@ -112,32 +133,6 @@ function init(canvas) {
         }, false);
     }
 
-    function addColorer(ele) {
-        ele.addEventListener('click', function() {
-            color(parseInt(ele.classList[2].charAt(3)), ele.parentElement);
-        }, false);
-    }
-
-    function remove(ele) {
-        const piece_id = ele.dataset.pieceid;
-        const screenshot_id = ele.dataset.screenshotid;
-
-        console.log(ele.dataset);
-
-        $.ajax({
-            type: "DELETE",
-            dataType: "JSON",
-            url: "/screenshots/" + screenshot_id + "/pieces/" + piece_id,
-            data: {
-            },
-            success: function(data) {
-                console.log("Piece Deleted")
-                ele.remove();
-                return;
-            }
-          });
-    }
-
     function cancel(e, canvas) {
         let obj = window.event? event : e
         if (obj.keyCode == 90 && obj.ctrlKey && canvas.lastElementChild) {
@@ -145,17 +140,10 @@ function init(canvas) {
         }
     }
 
-    function color(i, ele) {
-        const colors = ["bg-0", "bg-1", "bg-2", "bg-3", "bg-4"];
-        let j = (i+1) % 5;
-
-        colors.forEach(function(c) {
-            ele.classList.remove(c);
-            ele.lastElementChild.classList.remove(c);
-        })
-
-        ele.classList.add(colors[i]);
-        ele.lastElementChild.classList.add(colors[j]);
+    function addColorer(ele) {
+        ele.addEventListener('click', function() {
+            color(parseInt(ele.classList[2].charAt(3)), ele.parentElement);
+        }, false);
     }
 
     function callColor(e) {
@@ -180,4 +168,37 @@ function init(canvas) {
             }
         }
     }
+
+    function remove(ele) {
+        const piece_id = ele.dataset.pieceid;
+        const screenshot_id = canvas.dataset.screenshotid;
+
+        $.ajax({
+            type: "DELETE",
+            dataType: "JSON",
+            url: "/screenshots/" + screenshot_id + "/pieces/" + piece_id,
+            data: {
+            },
+            success: function(response) {
+                console.log("Piece Deleted");
+                ele.remove();
+                return;
+            }
+        });
+    }
+
+    function color(i, ele) {
+        const colors = ["bg-0", "bg-1", "bg-2", "bg-3", "bg-4"];
+        let j = (i+1) % 5;
+
+        colors.forEach(function(c) {
+            ele.classList.remove(c);
+            ele.lastElementChild.classList.remove(c);
+        })
+
+        ele.classList.add(colors[i]);
+        ele.lastElementChild.classList.add(colors[j]);
+    }
+
+    
 }

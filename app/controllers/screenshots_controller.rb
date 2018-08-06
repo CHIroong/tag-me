@@ -13,9 +13,27 @@ class ScreenshotsController < ApplicationController
   end
 
   skip_before_action :verify_authenticity_token
+  def create_piece
+    screenshot_id = params[:id]
+    screenshot = Screenshot.find(screenshot_id)
+
+    @new_piece = Piece.create(:screenshot_id => screenshot_id, :type_id => 1, :width => params[:width], :height => params[:height], :left => params[:left], :top => params[:top])
+    
+    # @new_piece = screenshot.pieces.new
+    # @new_piece.type_id = 0
+    # @new_piece.width = params[:width]
+    # @new_piece.height = params[:height]
+    # @new_piece.left = params[:left]
+    # @new_piece.top = params[:top]
+    # @new_piece.save
+    
+    #redirect_to action: 'index'
+    render json: {id: @new_piece.id}
+  end
+
   def destroy_piece
     piece_id = params[:piece_id]
-    Piece.destroy(piece_id)
+    Piece.destroy(piece_id.to_s)
 
     #redirect_to action: 'index'
     render json: {}

@@ -37,7 +37,7 @@
     .remove {
         &:hover {
             &::after, &::before {
-                background-color: #fff;
+                background-color: rgba(0,0,0,0.5);
             }
         }
         &::after, &::before {

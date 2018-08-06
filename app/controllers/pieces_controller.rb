@@ -12,29 +12,8 @@ class PiecesController < ApplicationController
   def show
   end
 
-  # GET /pieces/new
-  def new
-    @piece = Piece.new
-  end
-
   # GET /pieces/1/edit
   def edit
-  end
-
-  # POST /pieces
-  # POST /pieces.json
-  def create
-    @piece = Piece.new(piece_params)
-
-    respond_to do |format|
-      if @piece.save
-        format.html { redirect_to @piece, notice: 'Piece was successfully created.' }
-        format.json { render :show, status: :created, location: @piece }
-      else
-        format.html { render :new }
-        format.json { render json: @piece.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /pieces/1
