@@ -196,8 +196,21 @@ function init(canvas) {
             ele.lastElementChild.classList.remove(c);
         })
 
-        ele.classList.add(colors[i]);
-        ele.lastElementChild.classList.add(colors[j]);
+        $.ajax({
+            type: "GET",
+            dataType: "JSON",
+            url: "/pieces/" + ele.dataset.pieceid + "/type/" + (i+1),
+            data: {
+
+            },
+            success: function(response) {
+                ele.classList.add(colors[i]);
+                ele.lastElementChild.classList.add(colors[j]);
+                console.log(response.target);
+                return;
+            }
+        });
+        
     }
 
     

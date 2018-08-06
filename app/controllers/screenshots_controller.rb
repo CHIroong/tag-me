@@ -30,6 +30,15 @@ class ScreenshotsController < ApplicationController
     render json: {}
   end
 
+  def change_type
+    piece_id = params[:id]
+    @target = Piece.find_by_id(piece_id)
+    @target.type_id = params[:type_id]
+    @target.save
+
+    render json: {target: @target}
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_screenshot

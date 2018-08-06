@@ -10,5 +10,7 @@ class CreatePieces < ActiveRecord::Migration[5.1]
 
       t.timestamps
     end
+    
+    change_column_null :pieces, :type_id, true
   end
 end
