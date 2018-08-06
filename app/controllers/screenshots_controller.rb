@@ -12,28 +12,13 @@ class ScreenshotsController < ApplicationController
   def show
   end
 
-  # PATCH/PUT /screenshots/1
-  # PATCH/PUT /screenshots/1.json
-  def update
-    respond_to do |format|
-      if @screenshot.update(screenshot_params)
-        format.html { redirect_to @screenshot, notice: 'Screenshot was successfully updated.' }
-        format.json { render :show, status: :ok, location: @screenshot }
-      else
-        format.html { render :edit }
-        format.json { render json: @screenshot.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  skip_before_action :verify_authenticity_token
+  def destroy_piece
+    piece_id = params[:piece_id]
+    Piece.destroy(piece_id)
 
-  # DELETE /screenshots/1
-  # DELETE /screenshots/1.json
-  def destroy
-    @screenshot.destroy
-    respond_to do |format|
-      format.html { redirect_to screenshots_url, notice: 'Screenshot was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    #redirect_to action: 'index'
+    render json: {}
   end
 
   private

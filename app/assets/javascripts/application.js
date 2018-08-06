@@ -12,6 +12,7 @@
 //
 //= require rails-ujs
 //= require turbolinks
+//= require jquery
 //= require_tree .
 
 document.addEventListener("turbolinks:load", function() {
@@ -106,7 +107,9 @@ function init(canvas) {
     }
 
     function addRemover(ele) {
-        ele.addEventListener('click', remove, false);
+        ele.addEventListener('click', function(e) {
+            remove(e.target.parentElement);
+        }, false);
     }
 
     function addColorer(ele) {
@@ -115,19 +118,36 @@ function init(canvas) {
         }, false);
     }
 
-    function remove(e) {
-        e.target.parentElement.remove(); // TODO: call DESTROY
+    function remove(ele) {
+        const piece_id = ele.dataset.pieceid;
+        const screenshot_id = ele.dataset.screenshotid;
+
+        console.log(ele.dataset);
+
+        $.ajax({
+            type: "DELETE",
+            dataType: "JSON",
+            url: "/screenshots/" + screenshot_id + "/pieces/" + piece_id,
+            data: {
+            },
+            success: function(data) {
+                console.log("Piece Deleted")
+                ele.remove();
+                return;
+            }
+          });
     }
 
     function cancel(e, canvas) {
-        var obj = window.event? event : e
-        if (obj.keyCode == 90 && obj.ctrlKey && canvas.lastElementChild)
-            canvas.lastElementChild.remove(); // TODO: call DESTROY
+        let obj = window.event? event : e
+        if (obj.keyCode == 90 && obj.ctrlKey && canvas.lastElementChild) {
+            remove(canvas.lastElementChild)
+        }
     }
 
     function color(i, ele) {
-        let colors = ["bg-0", "bg-1", "bg-2", "bg-3", "bg-4"],
-            j = (i+1) % 5;
+        const colors = ["bg-0", "bg-1", "bg-2", "bg-3", "bg-4"];
+        let j = (i+1) % 5;
 
         colors.forEach(function(c) {
             ele.classList.remove(c);
@@ -139,7 +159,7 @@ function init(canvas) {
     }
 
     function callColor(e) {
-        var obj = window.event? event : e
+        let obj = window.event? event : e
         if (obj.keyCode >= 49 && obj.keyCode <= 53) {
             switch(obj.keyCode) {
                 case 49:

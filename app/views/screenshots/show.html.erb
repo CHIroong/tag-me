@@ -1,7 +1,10 @@
 <img id="bg" src="<%= @screenshot.image %>" alt="screenshot">
 <div id="canvas" tabindex='1'>
     <% @screenshot.pieces.each do |p| %>
-        <div class="rectangle <%= Type.find(p.type_id).color %>" style="left: <%= p.left%>px; top: <%= p.top%>px; width: <%= p.width %>px; height: <%= p.height%>px;">
+        <div class="rectangle <%= Type.find(p.type_id).color %>" 
+             style="left: <%= p.left%>px; top: <%= p.top%>px; width: <%= p.width %>px; height: <%= p.height%>px;"
+             data-pieceId="<%= p.id %>"
+             data-screenshotId="<%= @screenshot.id %>">
             <span class="btn remove"></span>
             <span class="btn color bg-<%= (Type.find(p.type_id).color[3].to_i + 1) % 5 %>"></span>
         </div>
