@@ -19,15 +19,6 @@ class ScreenshotsController < ApplicationController
 
     @new_piece = Piece.create(:screenshot_id => screenshot_id, :type_id => 1, :width => params[:width], :height => params[:height], :left => params[:left], :top => params[:top])
     
-    # @new_piece = screenshot.pieces.new
-    # @new_piece.type_id = 0
-    # @new_piece.width = params[:width]
-    # @new_piece.height = params[:height]
-    # @new_piece.left = params[:left]
-    # @new_piece.top = params[:top]
-    # @new_piece.save
-    
-    #redirect_to action: 'index'
     render json: {id: @new_piece.id}
   end
 
