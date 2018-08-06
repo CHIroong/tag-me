@@ -16,7 +16,8 @@
 //= require_tree .
 
 document.addEventListener("turbolinks:load", function() {
-    init(document.getElementById('canvas'));
+    if (document.getElementById('canvas'))
+        init(document.getElementById('canvas'));
 });
 
 let drag = false,
@@ -201,16 +202,13 @@ function init(canvas) {
             dataType: "JSON",
             url: "/pieces/" + ele.dataset.pieceid + "/type/" + (i+1),
             data: {
-
             },
             success: function(response) {
                 ele.classList.add(colors[i]);
                 ele.lastElementChild.classList.add(colors[j]);
-                console.log(response.target);
                 return;
             }
         });
-        
     }
 
     

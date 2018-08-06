@@ -1,4 +1,10 @@
 <div class="container-fluid">
+ <div class="row pt-1 pl-1">
+    <div class="col-1"></div>
+    <% Type.all.each do |t| %>
+      <div class="col-2 <%= t.color %> text-center"><br><%= t.name %><br><br></div>
+    <% end %>
+  </div>
   <div class="row pt-1 pl-1">
     <% @screenshots.each do |s| %>
       <%= link_to screenshot_path(s), :class => "col-2 pl-0 mb-1" do %>
