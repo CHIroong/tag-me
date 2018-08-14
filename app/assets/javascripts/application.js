@@ -31,16 +31,16 @@ let drag = false,
 
 function init(canvas) {
     let bg = document.getElementById("bg")
-    canvas.style.height = bg.scrollHeight + "px";
-    canvas.style.width = bg.scrollWidth + "px";
+    bg.onload = function(){
+        canvas.style.height = bg.scrollHeight + "px";
+        canvas.style.width = bg.scrollWidth + "px";
+    };
 
     canvas.addEventListener('mousedown', mouseDown, false);
     canvas.addEventListener('mouseup', mouseUp, false);
     canvas.addEventListener('mousemove', mouseMove, false);
     
-    document.addEventListener('keydown', function(e) {
-        cancel(e, canvas);
-    }, false);
+    canvas.addEventListener('keydown', cancel, false);
 
     Array.from(document.querySelectorAll(".remove")).forEach(addRemover);
     Array.from(document.querySelectorAll(".color")).forEach(addColorer);
@@ -130,11 +130,16 @@ function init(canvas) {
 
     function addRemover(ele) {
         ele.addEventListener('click', function(e) {
+            e.preventDefault()
+            e.stopPropagation();
             remove(e.target.parentElement);
         }, false);
     }
 
-    function cancel(e, canvas) {
+    function cancel(e) {
+        e.preventDefault()
+        e.stopPropagation();
+
         let obj = window.event? event : e
         if (obj.keyCode == 90 && obj.ctrlKey && canvas.lastElementChild) {
             remove(canvas.lastElementChild)
@@ -181,8 +186,9 @@ function init(canvas) {
             data: {
             },
             success: function(response) {
-                console.log("Piece Deleted");
+                console.log(screenshot_id, piece_id);
                 ele.remove();
+                console.log("Piece Deleted");
                 return;
             }
         });
