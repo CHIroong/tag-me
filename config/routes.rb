@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'screenshots#index'
 
   post '/screenshots/:id/pieces', to: 'screenshots#create_piece'
+  get '/screenshots/:id/export', to: 'screenshots#export_piece'
   delete '/screenshots/:id/pieces/:piece_id', to: 'screenshots#destroy_piece'
   get '/pieces/:id/type/:type_id', to: 'screenshots#change_type'
 end
