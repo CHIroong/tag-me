@@ -30,6 +30,12 @@ class ScreenshotsController < ApplicationController
     render json: {}
   end
 
+  def export_piece
+    @target = Piece.all
+
+    render json: {target: @target}
+  end
+
   def change_type
     piece_id = params[:id]
     @target = Piece.find_by_id(piece_id)
