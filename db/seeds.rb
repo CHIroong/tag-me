@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-s1 = Screenshot.create(isFinished: false, assignee: "Jaemin", image: "https://user-images.githubusercontent.com/17509651/43684963-14b98a6c-98e5-11e8-8a31-91b1554d34bd.png")
+# s1 = Screenshot.create(isFinished: false, assignee: "Jaemin", image: "https://user-images.githubusercontent.com/17509651/43684963-14b98a6c-98e5-11e8-8a31-91b1554d34bd.png")
 
 
 t1 = Type.create(name: 'Text', color: 'bg-0')
