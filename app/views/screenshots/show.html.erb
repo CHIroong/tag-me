@@ -1,5 +1,5 @@
 <!-- <img id="bg" src="<%= @screenshot.image %>" alt="screenshot"> -->
-<%= image_tag "#{@screenshot.id}.png", id: "bg" %>
+<%= image_tag "#{@screenshot.id - 1}.png", id: "bg" %>
 <div id="canvas" tabindex="1" data-screenshotId="<%= @screenshot.id %>">
     <% @screenshot.pieces.each do |p| %>
         <div class="rectangle <%= Type.find(p.type_id).color %>" 
