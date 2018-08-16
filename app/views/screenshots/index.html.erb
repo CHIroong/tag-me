@@ -9,9 +9,7 @@
     <% @screenshots.each do |s| %>
       <%= link_to screenshot_path(s), :class => "thumb col-2 pl-0 mb-1" do %>
         <!-- <img class="thumb" src="<%= s.image %>" alt="screen"> -->
-        <% if s.id < 9 %>
-          <%= image_tag "#{s.id - 1}.png" %>
-        <% end %>
+        <%= image_tag "#{s.id - 1}.png" %>
       <% end %>
     <% end %>
   </div>

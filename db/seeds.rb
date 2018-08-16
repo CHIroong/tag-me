@@ -6,16 +6,16 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-s1 = Screenshot.create(isFinished: false, assignee: "Jaemin", image: "https://user-images.githubusercontent.com/17509651/43684963-14b98a6c-98e5-11e8-8a31-91b1554d34bd.png")
+# s1 = Screenshot.create(isFinished: false, assignee: "Jaemin", image: "https://user-images.githubusercontent.com/17509651/43684963-14b98a6c-98e5-11e8-8a31-91b1554d34bd.png")
 
 
 t1 = Type.create(name: 'Text', color: 'bg-0')
 t2 = Type.create(name: 'Image', color: 'bg-1')
 t3 = Type.create(name: 'Graph', color: 'bg-2')
 t4 = Type.create(name: 'Ad', color: 'bg-3')
-t5 = Type.create(name: 'Uncertain', color: 'bg-4')
+t5 = Type.create(name: 'Ambiguous', color: 'bg-4')
 
-u1 = Piece.create(screenshot_id: s1.id, type_id: t1.id, left: 30, top: 20, width: 65, height: 40) # image
+# u1 = Piece.create(screenshot_id: s1.id, type_id: t1.id, left: 30, top: 20, width: 65, height: 40) # image
 
 Screenshot.create(isFinished: false, assignee: "Kiroong", image:"https://github.com/CHIroong/V2A/raw/master/crawler/screenshot/0.png")
 Screenshot.create(isFinished: false, assignee: "Kiroong", image:"https://github.com/CHIroong/V2A/raw/master/crawler/screenshot/1.png")
