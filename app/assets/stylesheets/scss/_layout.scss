@@ -27,7 +27,7 @@
             color: black;
         }
     }
-    &.bg-0:after {
+    &.bg-0 {
         &:after {
             content: "1. Text";
         }
@@ -35,7 +35,7 @@
             content: "Next: 2. Image";
         }
     }
-    &.bg-1:after {
+    &.bg-1 {
         &:after {
             content: "2. Image";
         }
@@ -43,7 +43,7 @@
             content: "Next: 3. Graph";
         }
     }
-    &.bg-2:after {
+    &.bg-2 {
         &:after {
             content: "3. Graph";
         }
@@ -51,7 +51,7 @@
             content: "Next: 4. Ads";
         }
     }
-    &.bg-3:after {
+    &.bg-3 {
         &:after {
             content: "4. Ads";
         }
