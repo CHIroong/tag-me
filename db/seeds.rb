@@ -13,9 +13,9 @@ t1 = Type.create(name: 'Text', color: 'bg-0')
 t2 = Type.create(name: 'Image', color: 'bg-1')
 t3 = Type.create(name: 'Graph', color: 'bg-2')
 t4 = Type.create(name: 'Ad', color: 'bg-3')
-t5 = Type.create(name: 'BadAd', color: 'bg-4')
+t5 = Type.create(name: 'Ambiguous', color: 'bg-4')
 
-u1 = Piece.create(screenshot_id: s1.id, type_id: t1.id, left: 30, top: 20, width: 65, height: 40) # image
+# u1 = Piece.create(screenshot_id: s1.id, type_id: t1.id, left: 30, top: 20, width: 65, height: 40) # image
 
 Screenshot.create(isFinished: false, assignee: "Kiroong", image:"https://github.com/CHIroong/V2A/raw/master/crawler/screenshot/0.png")
 Screenshot.create(isFinished: false, assignee: "Kiroong", image:"https://github.com/CHIroong/V2A/raw/master/crawler/screenshot/1.png")
