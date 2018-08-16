@@ -22,6 +22,50 @@
     &.bg-0, &.bg-1, &.bg-2, &.bg-3, &.bg-4 {
         border-color: transparent;
         opacity: 0.7;
+        &:after {
+            font-weight: bold;
+            color: black;
+        }
+    }
+    &.bg-0:after {
+        &:after {
+            content: "1. Text";
+        }
+        .color:after {
+            content: "Next: 2. Image";
+        }
+    }
+    &.bg-1:after {
+        &:after {
+            content: "2. Image";
+        }
+        .color:after {
+            content: "Next: 3. Graph";
+        }
+    }
+    &.bg-2:after {
+        &:after {
+            content: "3. Graph";
+        }
+        .color:after {
+            content: "Next: 4. Ads";
+        }
+    }
+    &.bg-3:after {
+        &:after {
+            content: "4. Ads";
+        }
+        .color:after {
+            content: "Next: 2. Image";
+        }
+    }
+    &.bg-4 {
+        &:after {
+            content: "5. Ambig";
+        }
+        .color:after {
+            content: "Next: 1. Text";
+        }
     }
     span {
         font-size: .8em;
@@ -36,7 +80,12 @@
         }    
     }
     .color {
-        border-radius: 50%;
+        border-radius: 10px;
+        float: right;
+        width: 110px;
+        text-align: center;
+        color: black;
+        text-decoration: underline;
     }
     .remove {
         &:hover {
