@@ -25,6 +25,8 @@
         &:after {
             font-weight: bold;
             color: black;
+            white-space: nowrap;
+            position: absolute;
         }
     }
     &.bg-0 {
@@ -82,10 +84,13 @@
     .color {
         border-radius: 10px;
         float: right;
-        width: 110px;
+        max-width: 30%;
+        width: unset;
         text-align: center;
         color: black;
         text-decoration: underline;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
     .remove {
         &:hover {
